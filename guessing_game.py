@@ -1,14 +1,3 @@
-"""
-Python Web Development Techdegree
-Project 1 - Number Guessing Game
---------------------------------
-
-For this first project we will be using Workspaces.
-
-NOTE: If you strongly prefer to work locally on your own computer, you can totally do that by clicking: File -> Download Workspace in the file menu after you fork the snapshot of this workspace.
-
-"""
-
 import random
 
 """
@@ -29,9 +18,7 @@ def start_game():
     STARTNUMBER = 1
     ENDNUMBER = 10
     tries = 1
-    print("--------------------------------")
-    print("Welcome to the Number Guessing Game!")
-    print("--------------------------------")
+    printIntro()
     random_number = generateRandomNumber(STARTNUMBER, ENDNUMBER)
     while play_again != 'n':
         if play_again != '':
@@ -45,7 +32,9 @@ def start_game():
                 print(f"\n You got it! It took you {tries} tries")
                 if tries < high_score:
                     high_score = tries
-                play_again = input("Would you like to play again? (y/n)").lower()
+                play_again = input("Would you like to play again? (y/n): ").lower()
+                while play_again != 'y' and play_again != 'n':
+                    play_again = input("Invalid Input! Please enter a 'y' (to play again) or 'n' (to quit the game): ")
             elif user_guess <= ENDNUMBER and user_guess > random_number:
                 tries += 1
                 print("It is lower")
@@ -58,17 +47,22 @@ def start_game():
             print('Please enter a valid integer')
         except Exception as err:
             print(err)
-    print("\n--------------------------------")
-    print("Thanks for playing the Number Guessing Game! See you next time!")
-    print("--------------------------------")
+    printGoodbye()
+
 
 
 def generateRandomNumber(startRange, endRange):
     return random.randint(startRange, endRange)
 
+def printIntro():
+    print("--------------------------------")
+    print("Welcome to the Number Guessing Game!")
+    print("--------------------------------")
 
-
-
+def printGoodbye():
+    print("\n--------------------------------")
+    print("Thanks for playing the Number Guessing Game! See you next time!")
+    print("--------------------------------")
 
 # Kick off the program by calling the start_game function.
 start_game()
