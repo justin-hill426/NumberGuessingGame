@@ -24,24 +24,43 @@ import random
 """
 
 def start_game():
-    high_score = None
+    high_score = float('inf')
     play_again = ""
     STARTNUMBER = 1
     ENDNUMBER = 10
-    tries = 0
+    tries = 1
     print("--------------------------------")
     print("Welcome to the Number Guessing Game!")
     print("--------------------------------")
-    random_number = random.randint(STARTNUMBER, ENDNUMBER)
+    random_number = generateRandomNumber(STARTNUMBER, ENDNUMBER)
     while play_again != 'n':
-        if high_score:
+        if play_again != '':
             print(f"The HIGHSCORE is {high_score}")
-        user_guess = int(input(f"Pick a number between {STARTNUMBER} and {ENDNUMBER}: "))
-        if user_guess == random_number:
-            print(f"/n You got it! It took you {tries}")
-        elif user_guess <= ENDNUMBER and user_guess > :
-            print("It is lower")
+            random_number = generateRandomNumber(STARTNUMBER, ENDNUMBER)
+            play_again = ''
+            tries = 1
+        try:
+            user_guess = int(input(f"Pick a number between {STARTNUMBER} and {ENDNUMBER}: "))
+            if user_guess == random_number:
+                print(f"\n You got it! It took you {tries} tries")
+                if tries < high_score:
+                    high_score = tries
+                play_again = input("Would you like to play again? (y/n)").lower()
+            elif user_guess <= ENDNUMBER and user_guess > random_number:
+                tries += 1
+                print("It is lower")
+            elif user_guess >= STARTNUMBER and user_guess < random_number:
+                tries += 1
+                print("It is higher")
+            else:
+                raise Exception("The number you entered is outside the range")
+        except ValueError as ve:
+            print('Please enter a valid integer')
+        except Exception as err:
+            print(err)
 
+def generateRandomNumber(startRange, endRange):
+    return random.randint(startRange, endRange)
 
 
 
