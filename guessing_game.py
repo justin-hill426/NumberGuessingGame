@@ -58,6 +58,10 @@ def start_game():
             print('Please enter a valid integer')
         except Exception as err:
             print(err)
+    print("\n--------------------------------")
+    print("Thanks for playing the Number Guessing Game! See you next time!")
+    print("--------------------------------")
+
 
 def generateRandomNumber(startRange, endRange):
     return random.randint(startRange, endRange)
