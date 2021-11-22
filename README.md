@@ -5,3 +5,4 @@
  * User can play game until 'n' is inputted
  Fun game to play with friends/multiplayer
  Supports points and multiplayer functionality
+ Play multiple times to beat high score.
